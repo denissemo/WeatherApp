@@ -6,7 +6,7 @@
     <title>Title</title>
 </head>
 <body>
-    <form action="/" method="get">
+    <form action="{% url "current-city" %}" method="get">
         <input type="text" name="city" id="cityName" placeholder="Enter city *" >
         <input type="submit" value="Submit">
     </form>
