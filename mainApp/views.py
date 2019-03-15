@@ -1,3 +1,8 @@
 from django.shortcuts import render
+from .weather_models import SimpleWeather
 
-# Create your views here.
+
+def index(request):
+    print(request.GET['city'])
+    SimpleWeather(request.GET['city'])
+    return render(request, 'mainPage/index.html')
