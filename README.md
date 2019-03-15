@@ -1,4 +1,4 @@
 # WeatherApp
 Requires: 
-pip install requests
+pip install requests\n
 pip install django
