@@ -1,0 +1,38 @@
+{% extends "index.html" %}
+
+{% block content %}
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static "css/login_style.css" %}">
+    {% if form.errors %}
+        <p>Your username and password didn't match. Please try again.</p>
+    {% endif %}
+    {% if next %}
+        {% if user.is_authenticated %}
+            <p>Your account doesn't have access to this page. To proceed,
+                please login with an account that has access.</p>
+        {% else %}
+            <p>Please login to see this page.</p>
+        {% endif %}
+    {% endif %}
+    <div class="container login-container">
+        <div class="col-md-6 login-form-1">
+            <h3>Sign in to MySite</h3>
+            <form method="post" action="{% url 'log_in' %}">
+                {% csrf_token %}
+                <div class="form-group">
+                    <input type="text" class="form-control" name="username"
+                           autofocus="" placeholder="Your Username *"
+                           required="" id="id_username">
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control"
+                           placeholder="Your Password *" name="password"
+                           required="" id="id_password">
+                </div>
+                <div class="form-group">
+                    <input type="submit" class="btnSubmit" value="login"/>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

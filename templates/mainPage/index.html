@@ -3,12 +3,55 @@
 <head>
     <meta charset="UTF-8">
     {% load staticfiles %}
-    <title>Title</title>
+    <link rel="icon" type="image/png" href="{% static "img/favicon.ico" %}"/>
+    <link rel="stylesheet" href="{% static "css/bootstrap.min.css" %}">
+    <link rel="stylesheet" href="{% static "css/index-style.css" %}">
+    <title>Weather</title>
 </head>
 <body>
-    <form action="{% url "current-city" %}" method="get">
-        <input type="text" name="city" id="cityName" placeholder="Enter city *" >
-        <input type="submit" value="Submit">
-    </form>
+<div class="wrapper">
+    <header>
+        <div class="head_content">
+{#            {% load static %}#}
+{#            <a href="/" class="logo"><img#}
+{#                    src="{% static "img/django.png" %}"#}
+{#                    alt="Django logo"></a>#}
+{#            <nav>#}
+{#                {% if not request.user.is_authenticated %}#}
+{#                    <li><a id="sign_up" class="btn btn-danger btn-lg" href="{% url "sign_up" %}">Sign up</a></li>#}
+{#                    <li><a id="log_in" class="btn btn-success btn-lg" href="{% url "log_in" %}">Log in</a></li>#}
+{#                {% else %}#}
+{#                    <li>#}
+{#                        <a href="{% url "account_view" request.user %}" class="btn btn-info btn-lg">{{ request.user }}</a>#}
+{#                        <a href="{% url "logout" %}" class="btn btn-danger btn-lg">Log out</a>#}
+{#                    </li>#}
+{#                {% endif %}#}
+{#            </nav>#}
+        </div>
+
+    </header>
+    <main>
+        <div class="content">
+            {% block content %}
+                <form action="{% url "current-city" %}" method="get">
+                    <input type="text" name="city" id="cityName" placeholder="Enter city *">
+                    <input type="submit" value="Submit">
+                </form>
+            {% endblock %}
+        </div>
+    </main>
+</div>
+<footer>
+    <div class="content">
+        <div class="footer_menu">
+            <a href="/" class="logo"><img src="{% static "img/Weather-icon.png" %}" alt="logo"></a>
+        </div>
+        <div class="footer_contacts">
+            Author contacts:
+            <a href="https://t.me/DenisSemo">Telegram »</a>
+            <a href="https://github.com/denissemo">GitHub »</a>
+        </div>
+    </div>
+</footer>
 </body>
 </html>
