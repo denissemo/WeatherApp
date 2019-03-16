@@ -11,7 +11,6 @@ class SimpleWeatherView(View):
     template = 'current-city/current-city.html'
 
     def get(self, *args, **kwargs):
-        print(self.request.GET['city'])
         simpleWeather = SimpleWeather(self.request.GET['city'])
         # this use for jinja
         context = {
