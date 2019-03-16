@@ -1,4 +1,4 @@
-{% extends "index.html" %}
+{% extends "mainPage/index.html" %}
 
 {% block content %}
     {% load staticfiles %}
@@ -16,7 +16,7 @@
     {% endif %}
     <div class="container login-container">
         <div class="col-md-6 login-form-1">
-            <h3>Sign in to MySite</h3>
+            <h3>Sign in</h3>
             <form method="post" action="{% url 'log_in' %}">
                 {% csrf_token %}
                 <div class="form-group">
