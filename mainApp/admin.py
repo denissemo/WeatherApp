@@ -1,7 +1,6 @@
 from django.contrib import admin
-from .models import UserAccount
-from .models import City
+from .models import Day, City
 
 
-admin.site.register(UserAccount)
+admin.site.register(Day)
 admin.site.register(City)
