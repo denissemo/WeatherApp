@@ -15,27 +15,34 @@
             {% load static %}
             <a href="/" class="logo"><img src="{% static "img/Weather-icon.png" %}" alt="logo"></a>
             <nav>
-                {% if not request.user.is_authenticated %}
-                    <li><a id="sign_up" class="btn btn-danger btn-lg" href="{% url "sign_up" %}">Sign up</a></li>
-                    <li><a id="log_in" class="btn btn-success btn-lg" href="{% url "log_in" %}">Log in</a></li>
-                {% else %}
-                    <li>
-{#                        <a href="{% url "account_view" request.user %}" class="btn btn-info btn-lg">{{ request.user }}</a>#}
-{#                        <a href="{% url "logout" %}" class="btn btn-danger btn-lg">Log out</a>#}
-                    </li>
-                {% endif %}
+                <li><a class="btn btn-primary btn-lg"
+                       href="/">Home</a></li>
+                <li><a class="btn btn-success btn-lg"
+                       href="{% url 'cities' %}">Cities</a></li>
             </nav>
         </div>
 
     </header>
     <main>
         <div class="content">
-            {% block content %}
-                <form action="{% url "current-city" %}" method="get">
-                    <input type="text" name="city" id="cityName" placeholder="Enter city *">
-                    <input type="submit" value="Submit">
-                </form>
-            {% endblock %}
+            <div class="add_form">
+                {% block content %}
+                    <form action="{% url "add-city" %}" method="get">
+                        <div class="form-group">
+                            <input type="text" name="city" id="cityName" class="form-control"
+                                   placeholder="Enter city *">
+                        </div>
+                        <input type="submit" class="btn btn-primary" value="Add city">
+                        {% if visible %}
+                            {% if weather.isFound %}
+                                <p>City {{ weather.city }} successfully added</p>
+                            {% else %}
+                                <p>City not found</p>
+                            {% endif %}
+                        {% endif %}
+                    </form>
+                {% endblock %}
+            </div>
         </div>
     </main>
 </div>
