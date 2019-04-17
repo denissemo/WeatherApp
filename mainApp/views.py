@@ -60,3 +60,27 @@ class SubmitCity(View):
                 # get data from DB
                 response.append(Day.objects.filter(city__name=city_name, date=date).values()[0])
             return HttpResponse("\n".join([str(i) for i in response]))  # join responses by '\n'
+
+
+class AddCity(View):
+    template = 'mainPage/index.html'
+
+    def get(self, *args, **kwargs):
+        weather = Weather(self.request.GET['city'])
+        if weather.isFound:
+            city = City.objects.update_or_create(name=weather.city)
+            for i in range(weather.days_count):
+                city[0].day_set.update_or_create(
+                    date=weather.dates[i],
+                    min_temp=weather.min_temps[i],
+                    max_temp=weather.max_temps[i],
+                    wind=weather.winds[i],
+                    description=weather.descriptions[i],
+                    clouds=weather.clouds[i],
+                    icon=weather.icons[i]
+                )
+        context = {
+            'visible': True,
+            'weather': weather
+        }
+        return render(self.request, self.template, context)
